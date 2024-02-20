@@ -14,8 +14,8 @@ export default function Post({_id, title, summary, cover, content, createdAt, au
           <Link to={`/post/${_id}`}>
             <h2>{title}</h2>
           </Link>
-          <p className="info" href='#'>
-            <a className="author">{author}</a>
+          <p className="info">
+            <a className="author" href="#">{author}</a>
             <time>{formatISO9075(new Date(createdAt))}</time>
           </p>
           <p className="summary">{summary}</p>
