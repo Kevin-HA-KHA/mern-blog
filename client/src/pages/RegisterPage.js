@@ -1,11 +1,12 @@
 import {useState} from "react";
+import apiConfig from "../apiConfig";
 
 export default function RegisterPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     async function register(e) {  
         e.preventDefault();
-        const response = await fetch('http://localhost:4000/register', {
+        const response = await fetch(`${apiConfig.apiUrl}/register`, {
             method: 'POST',
             body: JSON.stringify({username, password}),
             headers: {'Content-Type':'application/json'},

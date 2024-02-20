@@ -3,6 +3,7 @@ import {useNavigate, Navigate, useParams} from 'react-router-dom';
 import { formatISO9075 } from 'date-fns';
 import { UserContext } from '../UserContext';
 import { Link } from 'react-router-dom';
+import apiConfig from '../apiConfig';
 
 export default function PostPage() {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ export default function PostPage() {
     const [askConfirm, setAskConfirm] = useState(false);
     const {id} = useParams();
     useEffect(() => {
-        fetch(`http://localhost:4000/post/${id}`)
+        fetch(`${apiConfig.apiUrl}/post/${id}`)
             .then(response =>{
                 response.json().then(postInfo => {
                     setPostInfo(postInfo);

@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import Editor from './Editor';
+import apiConfig from './apiConfig';
 
 
 export default function EditPost() {
@@ -32,7 +33,7 @@ export default function EditPost() {
       if (files?.[0]) {
         data.set('file', files?.[0]);
       }
-      const response = await fetch('http://localhost:4000/post',{
+      const response = await fetch(`${apiConfig.apiUrl}/post`,{
         method: 'PUT',
         body: data,
         credentials: 'include',
