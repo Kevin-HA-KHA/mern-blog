@@ -11,11 +11,13 @@ const uploadMiddleware = multer({dest: 'uploads/'})
 const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 4000;
+import apiConfig from '../client/src/apiConfig';
 
 const salt = bcrypt.genSaltSync(10);
 const secret = 'agfZF23Ffsdfsq32542';
 
-app.use(cors({credentials: true, origin:'http://localhost:3000'}));
+const appURL = apiConfig.appURL;
+app.use(cors({credentials: true, origin:`${appURL}`}));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
