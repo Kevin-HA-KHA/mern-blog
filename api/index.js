@@ -10,7 +10,7 @@ const multer = require('multer');
 const uploadMiddleware = multer({dest: 'uploads/'})
 const fs = require('fs');
 const app = express();
-
+const port = process.env.PORT || 4000;
 
 const salt = bcrypt.genSaltSync(10);
 const secret = 'agfZF23Ffsdfsq32542';
@@ -156,5 +156,7 @@ app.get('/post/:id', async (req, res) => {
     res.json(postDoc);
 });
 
-app.listen(4000);
 
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
