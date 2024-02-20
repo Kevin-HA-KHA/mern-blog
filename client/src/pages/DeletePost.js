@@ -17,7 +17,7 @@ export default function DeletePost() {
             }
           }
           deleteAPost();
-    }, [])
+    })
 
     if (redirect) {
         return <Navigate to={'/'} />

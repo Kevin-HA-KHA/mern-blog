@@ -13,7 +13,7 @@ export default function EditPost() {
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
-      fetch('http://localhost:4000/post/'+id)
+      fetch(`${apiConfig.apiUrl}/post/${id}`)
       .then(response => {
         response.json().then(postInfo => {
           setTitle(postInfo.title);
@@ -21,7 +21,7 @@ export default function EditPost() {
           setSummary(postInfo.summary);
         })
       })
-    }, [])
+    })
 
     async function updatePost(e) {
       e.preventDefault();

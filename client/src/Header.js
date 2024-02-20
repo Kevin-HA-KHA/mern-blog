@@ -1,20 +1,21 @@
 import { useEffect } from "react";
 import {Link} from "react-router-dom";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "./UserContext";
+import apiConfig from "./apiConfig";
 
 export default function Header() {
   const {setUserInfo, userInfo} = useContext(UserContext);
   
   useEffect(() => {
-    fetch('http://localhost:4000/profile', {
+    fetch(`${apiConfig.apiUrl}/profile`, {
       credentials: 'include',
     }).then(response => { 
       response.json().then(userInfo => {
         setUserInfo(userInfo)
       })
     })
-  }, [])
+  }, [setUserInfo])
 
   function logout() {
     fetch('http://localhost:4000/logout', {
