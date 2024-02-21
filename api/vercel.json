@@ -9,7 +9,8 @@
     "routes": [
      {
          "src": "/(.*)",
-         "dest": "*/"
+         "dest": "/"
      }
-    ]
+    ],
+    "rewrites": [{ "source": "/api/(.*)", "destination": "/api/index.js" }]
 }
