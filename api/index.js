@@ -11,7 +11,7 @@ const uploadMiddleware = multer({dest: 'uploads/'})
 const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 4000;
-import apiConfig from '../client/src/apiConfig';
+const apiConfig = require('../client/src/apiConfig');
 
 const salt = bcrypt.genSaltSync(10);
 const secret = 'agfZF23Ffsdfsq32542';
@@ -21,8 +21,14 @@ app.use(cors({credentials: true, origin:`${appURL}`}));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
-
 require('dotenv').config();
+mongoose.connect(process.env.MONGO_URL)
+.then(() => {
+    console.log('MangoDB connected')
+})
+.catch(error => {
+    console.log(error);
+});
 
 app.post('/register', async (req, res) => {
     mongoose.connect(process.env.MONGO_URL);
@@ -169,3 +175,4 @@ app.get('/post/:id', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
+

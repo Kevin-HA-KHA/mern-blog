@@ -21,7 +21,7 @@ export default function EditPost() {
           setSummary(postInfo.summary);
         })
       })
-    })
+    }, [id])
 
     async function updatePost(e) {
       e.preventDefault();

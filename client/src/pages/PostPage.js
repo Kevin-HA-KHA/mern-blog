@@ -19,7 +19,7 @@ export default function PostPage() {
                 });
                 
             })
-    })
+    }, [id])
 
     if (!postInfo) return (<></>);
 
