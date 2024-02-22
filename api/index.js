@@ -51,9 +51,9 @@ app.post('/login', async (req, res) => {
     }
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
-        jwt.sign({username, id:userDoc._id}, secret, { secure: true, sameSite: 'none', httpOnly: true }, (err, token) => {
+        jwt.sign({username, id:userDoc._id}, secret, {}, (err, token) => {
             if(err) throw err;
-            res.cookie('token', token).json({
+            res.cookie('token', token, {secure: true, sameSite: 'none', httpOnly: true }).json({
                 id:userDoc._id,
                 username, 
             });
