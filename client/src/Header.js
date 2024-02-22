@@ -9,13 +9,22 @@ export default function Header() {
   
   useEffect(() => {
     fetch(`${apiConfig.apiUrl}/profile`, {
+      method: 'GET',
       credentials: 'include',
-    }).then(response => { 
-      response.json().then(userInfo => {
-        setUserInfo(userInfo)
-      })
     })
-  }, [setUserInfo])
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des informations de profil');
+      }
+      return response.json();
+    })
+    .then(userInfo => {
+      setUserInfo(userInfo);
+    })
+    .catch(error => {
+      console.error('Erreur :', error);
+    });
+  }, [setUserInfo]);
 
   function logout() {
     fetch('http://localhost:4000/logout', {

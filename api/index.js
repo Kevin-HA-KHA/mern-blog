@@ -51,7 +51,7 @@ app.post('/login', async (req, res) => {
     }
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
-        jwt.sign({username, id:userDoc._id}, secret, {}, (err, token) => {
+        jwt.sign({username, id:userDoc._id}, secret, { secure: true, sameSite: 'none', httpOnly: true }, (err, token) => {
             if(err) throw err;
             res.cookie('token', token).json({
                 id:userDoc._id,
@@ -66,7 +66,7 @@ app.post('/login', async (req, res) => {
 app.get('/profile', (req, res) => {
     mongoose.connect(process.env.MONGO_URL);
     const {token} = req.cookies;
-    jwt.verify(token, secret, {}, (err, info) => {
+    jwt.verify(token, secret, { secure: true, sameSite: 'none', httpOnly: true }, (err, info) => {
         if (err) throw err;
         res.json(info);
     })
@@ -85,7 +85,7 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
     fs.renameSync(path, newPath);
 
   const {token} = req.cookies;
-  jwt.verify(token, secret, {}, async (err,info) => {
+  jwt.verify(token, secret, { secure: true, sameSite: 'none', httpOnly: true }, async (err,info) => {
     console.log('info = ' + info);
     if (err) throw err;
     const {title,summary,content} = req.body;
@@ -113,7 +113,7 @@ app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
     }
     
     const {token} = req.cookies; 
-    jwt.verify(token, secret, {}, async (err,info) => {
+    jwt.verify(token, secret, { secure: true, sameSite: 'none', httpOnly: true }, async (err,info) => {
         console.log('info = ' + info);
         if (err) throw err;
         const {id, title,summary,content} = req.body;
@@ -137,7 +137,7 @@ app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
 app.delete('/post/:id', async (req, res) => {
     mongoose.connect(process.env.MONGO_URL);
     const {token} = req.cookies;
-    jwt.verify(token, secret, {}, async (err,info) => {
+    jwt.verify(token, secret, { secure: true, sameSite: 'none', httpOnly: true }, async (err,info) => {
       if (err) throw err;
       const {id} = req.params;
       const postDoc = await Post.findById(id);
