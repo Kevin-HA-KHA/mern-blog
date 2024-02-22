@@ -17,7 +17,7 @@ const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRET;
 
 const appURL = apiConfig.appURL;
-app.use(cors({credentials: true, origin:['http://localhost:3000',`${appURL}`]}));
+app.use(cors({credentials: true, origin:['http://localhost:3000',`${appURL}`, 'https://mern-blog-app-liard.vercel.app']}));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
