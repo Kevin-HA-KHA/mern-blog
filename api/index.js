@@ -14,7 +14,7 @@ const port = process.env.PORT || 4000;
 const apiConfig = require('../client/src/apiConfig');
 
 const salt = bcrypt.genSaltSync(10);
-const secret = 'agfZF23Ffsdfsq32542';
+const secret = process.env.SECRET;
 
 const appURL = apiConfig.appURL;
 app.use(cors({credentials: true, origin:['http://localhost:3000',`${appURL}`]}));
