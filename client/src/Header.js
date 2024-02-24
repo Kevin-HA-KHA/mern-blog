@@ -3,10 +3,11 @@ import {Link} from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 import apiConfig from "./apiConfig";
+import LoginButton from "./components/LoginButton";
+import LogoutButton from "./components/LogoutButton";
 
 export default function Header() {
   const {setUserInfo, userInfo} = useContext(UserContext);
-  
   useEffect(() => {
     fetch(`${apiConfig.apiUrl}/profile`, {
       method: 'GET',
@@ -40,20 +41,8 @@ export default function Header() {
       <header>
         <Link to="/" className="logo">MonBlog</Link>
         <nav>
-          {username && (
-            <>
-              <div>Bonjour <span className="headerUsername">{username}</span>,</div>
-              <Link to="/create">Créer un nouveau post</Link>
-              <Link onClick={logout}>Déconnexion</Link>
-            </>
-          )}
-          {!username && (
-            <>
-              <Link to="/login">Connexion</Link>
-              <Link to="/register">Inscription</Link>
-            </>
-          )}
-
+          <LoginButton />
+          <LogoutButton />
           {/* <a href="/login">Connexion</a> */}
           {/* <a href="">Inscription</a> */}
         </nav>
