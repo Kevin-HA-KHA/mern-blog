@@ -5,8 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import {Auth0Provider} from '@auth0/auth0-react';
-require('dotenv').config();
-
 
 const domain = process.env.AUTH0_DOMAIN;
 const clientId = process.env.AUTH0_CLIENT_ID;
