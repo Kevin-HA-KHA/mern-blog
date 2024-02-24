@@ -12,6 +12,8 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 4000;
 const apiConfig = require('../client/src/apiConfig');
+require('dotenv').config();
+
 
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRET;
@@ -21,7 +23,6 @@ app.use(cors({credentials: true, origin:['http://localhost:3000',`${appURL}`, 'h
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
-require('dotenv').config();
 mongoose.connect(process.env.MONGO_URL)
 .then(() => {
     console.log('MangoDB connected')
